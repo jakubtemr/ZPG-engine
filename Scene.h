@@ -1,27 +1,34 @@
 #pragma once
-#define _USE_MATH_DEFINES
-#include "Model.h"
-#include "ShaderApp.h"
+#include "Object.h"
 #include "Camera.h"
-#include <vector>
-#include <cmath>
-#include <iostream>
-
-class Scene {
-public:
-    Scene();
-    void AddModel(GLuint model, ShaderApp* shader, GLsizei vertexCount);
-    void Render();
-    ~Scene();
-
+#include "Light.h"
+class Scene
+{
 private:
-    struct ModelShaderPair {
-       GLuint model;
-        ShaderApp* shader;
-        GLsizei vertexCount;
-    };
+	Scene(std::vector<Object*> objects, Camera* camera, std::vector<Light*> lights);
 
-    std::vector<ModelShaderPair> modelShaderPairs;
-    GLFWwindow* window;
-    Application app;
+public:
+	std::vector<Object*> objects;
+	Camera* camera;
+	std::vector<Light*> lights;
+	int objectIndex(GLuint id);
+
+	class Builder {
+	private:
+		Camera* camera;
+		std::vector<Object*> objects;
+		std::vector<Light*> lights;
+
+		void reset();
+
+	public:
+		Builder();
+		void addCamera(glm::vec3 eye, glm::vec3 target, glm::vec3 up);
+		void addObject(std::string modelName, std::string shaderName);
+		void addPointLight(glm::vec3 lightPos, glm::vec3 lightColor);
+		void addDirLight(glm::vec3 lightPos, glm::vec3 lightColor);
+		void addSpotLight(glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 lightDir, float cutOff);
+		Scene* build();
+	};
 };
+

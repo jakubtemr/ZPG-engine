@@ -1,4 +1,6 @@
 #pragma once
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include <GL/glew.h>
 //Include GLFW  
 #include <GLFW/glfw3.h>  
@@ -16,20 +18,26 @@
 #include <stdio.h>
 #include <iostream>
 #include <vector>
-/*
-#include "Shader.h"
-#include "Object.h"
+
+#include "Scene.h"
 #include "Camera.h"
 #include "ShaderManager.h"
 #include "ModelManager.h"
-*/
-#include "CallbackHandler.h"
-#include "Scene.h"
+#include "Object.h"
+#include "ShaderApp.h"
 
 class Application
 {
 public:
 	static Application* getInstance();
+
+	void cursor_pos_callback(GLFWwindow* window, double mouseX, double mouseY);
+	void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+	void button_callback(GLFWwindow* window, int button, int action, int mode);
+	void window_focus_callback(GLFWwindow* window, int focused);
+	void window_size_callback(GLFWwindow* window, int width, int height);
+	void window_iconify_callback(GLFWwindow* window, int iconified);
+	void error_callback(int error, const char* description);
 	void run();
 
 private:
@@ -45,6 +53,6 @@ private:
 	GLuint selectedObjectIndex;
 
 	Scene* mainScene;
-	//void identifyObject();
+	void identifyObject();
 	void pushObject();
 };
