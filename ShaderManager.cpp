@@ -10,9 +10,11 @@ ShaderManager* ShaderManager::getInstance() {
 }
 
 void ShaderManager::initShaders() {
-	shaders.emplace("lambert", ShaderApp("Shaders/Shader.vert", "Shaders/Lambert.frag"));
-	shaders.emplace("phong", ShaderApp("Shaders/Shader.vert", "Shaders/Phong.frag"));
-	shaders.emplace("blinn", ShaderApp("Shaders/Shader.vert", "Shaders/Blinn.frag"));
+	shaders.emplace("lambert", ShaderApp("../final/Shaders/Shader.vert", "../final/Shaders/Lambert.frag"));
+	shaders.emplace("phong", ShaderApp("../final/Shaders/Shader.vert", "../final/Shaders/Phong.frag"));
+	shaders.emplace("blinn", ShaderApp("../final/Shaders/Shader.vert", "../final/Shaders/Blinn.frag"));
+	shaders.emplace("phongControl", ShaderApp("../final/Shaders/Shader.vert", "../final/Shaders/PhongControl.frag"));
+	shaders.emplace("skybox", ShaderApp("../final/Shaders/SkyBox.vert", "../final/Shaders/SkyBox.frag"));
 }
 
 ShaderApp& ShaderManager::getShader(std::string shaderName)

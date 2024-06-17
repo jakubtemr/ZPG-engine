@@ -16,11 +16,13 @@ private:
     glm::vec3 eye;
     glm::vec3 target;
     glm::vec3 up;
-    glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 200.0f);
+    glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 300.0f);
     float alpha= 0.f;
     float fi=4.7f;
     float pos_x = 0.f;
     float pos_y = 0.f;
+    float width;
+    float height;
 
     float rotateSpeed = 0.2f;
     float moveSpeed = 0.2f;
@@ -28,9 +30,10 @@ private:
     bool mouseMoveEnable = false;
     int frontMove = 0;
     int sideMove = 0;
-
+    void updateProjectionMatrix();
     std::vector<CameraObserver*> cameraObservers;
 public:
+    glm::vec3 getCameraPos();
     Camera(glm::vec3 eye, glm::vec3 target, glm::vec3 up);
     glm::mat4 getCamera();
     glm::mat4 getProjectionMatrix();
@@ -45,7 +48,7 @@ public:
     void toRight();
     void toLeft();
     void update();
-
+    void setAspectRatio(float width, float height);
     void addCameraObserver(CameraObserver* observer) override;
     void removeCameraObserver(CameraObserver* observer) override;
     void notifyCameraObservers() override;

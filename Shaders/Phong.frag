@@ -24,13 +24,18 @@ in vec2 uv;
 out vec4 frag_colour;
 
 float lightCalc(vec3 lightVector){
-	float dot_product = max(dot(lightVector, normalize(ex_WorldNormal)), 0.0);
-	return dot_product; // Difuzn� slo�ka sv�tla
+    float dot_product = max(dot(lightVector, normalize(ex_WorldNormal)), 0.0);
+    
+    if(dot_product < 0.0) return 0.0; 
+
+    return dot_product; 
 }
 
 void main(){
 	vec3 lightVector;
-	vec3 diffuse;
+	vec4 texColor = texture(textureUnitID, uv);
+	//vec3 diffuse=texColor.rgb;
+	vec3 diffuse = vec3(0.5);
 
 	for(int i = 0; i < lightsCount; i++) {
 		if(lights[i].type == 0){
@@ -42,25 +47,27 @@ void main(){
 			diffuse += ((lightCalc(lightVector) * lights[i].barva));
 		}
 		else if(lights[i].type == 2) {
-			float theta = dot(lights[i].lightDir, normalize(-lights[i].position));
+			//float theta = dot(lights[i].lightDir, normalize(-lights[i].position));
+			//lightVector = normalize(lights[i].position - vec3(ex_WorldPos));
+			lightVector = normalize(cameraPos - vec3(ex_WorldPos));
+			//lightVector = normalize(ex_WorldPos.xyz - lights[i].position);
+			//float theta = dot(normalize(lights[i].lightDir), normalize(lightVector));
+			float theta = dot(normalize(lights[i].lightDir), normalize(lightVector));
+
 			if(theta > lights[i].cutOff) 
 			{       
 				diffuse += (lightCalc(lightVector) * lights[i].barva);
 			}
-			else{
-				diffuse += (lightCalc(vec3 (0.f,0.f,0.f)) * lights[i].barva);
+		else{
+			diffuse += (lightCalc(vec3 (0.f,0.f,0.f)) * lights[i].barva);
 			}
 		}
 	}
 
 	vec4 ambient = vec4( ambientColor, 1.0);
-	vec4 oColor=vec4(objectColor,1.0);
-	vec3 viewDir = normalize(cameraPos - vec3(ex_WorldPos)); // V
-	vec3 reflectDir = reflect(-lightVector, ex_WorldNormal); // R
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32); // ��m d�le t�m men�� odraz
-	//float specularStrength = 0.5;
-	//vec3 specular = specularStrength * spec * vec3(1.0f, 1.0f, 1.0f); // posledn� slo�ka je barva sv�tla
-	//frag_colour = ambient + diffuse + vec4(specular,1.f)+spec;
-	//frag_colour = ambient + (vec4(diffuse, 1.0) * texture(textureUnitID, uv)) + spec;
-	frag_colour =ambient + (vec4(diffuse, 1.0) * texture(textureUnitID, uv)) + spec;
+	vec3 viewDir = normalize(cameraPos - vec3(ex_WorldPos)); 
+	vec3 reflectDir = reflect(-lightVector, ex_WorldNormal); 
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32); 
+
+	frag_colour = ambient + (vec4(diffuse, 1.0) * texture(textureUnitID, uv)) + spec;
 };

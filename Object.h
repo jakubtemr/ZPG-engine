@@ -30,15 +30,17 @@ private:
 	glm::vec3 objectColor = glm::vec3(0.385, 0.647, 0.812);
 	glm::vec3 ambientColor = glm::vec3(0.1, 0.1, 0.1);
 	Movement* move;
+	Object* parentObject;
 
 	static unsigned int objectCount;
 
 public:
 	Object(std::string shaderName, std::string modelName);
 	unsigned int getId();
-
-	void addLineMove(glm::vec3 start, glm::vec3 end);
-	void addCircleMove(glm::vec3 start, int radius);
+	void setParent(Object* parent) { parentObject = parent; }
+	void addLineMove(glm::vec3 start, glm::vec3 end,float speed);
+	void addCircleMove(glm::vec3 start, int radius,float speed);
+	void addCurveMove(glm::vec3 start, glm::vec3 end, glm::vec3 control1, glm::vec3 control2, float speed);
 	void update();
 	void draw();
 	void setColor(glm::vec3 color);
@@ -46,5 +48,6 @@ public:
 	void rotate(float angle, glm::vec3 axis);
 	void translate(glm::vec3 delta);
 	void setPos(glm::vec3 pos);
+	glm::vec3 getPos() const;
 };
 

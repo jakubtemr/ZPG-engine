@@ -70,6 +70,7 @@ void ShaderApp::useProgram() {
 
 void ShaderApp::cancelProgram() {
 	glUseProgram(0);
+	glDeleteProgram(this->shaderProgramId);
 }
 
 void ShaderApp::createShader(const std::string& vertexShader, const std::string& fragmentShader)
@@ -91,7 +92,7 @@ void ShaderApp::sendUniform(const GLchar* name, glm::mat4 data) {
 		glUniformMatrix4fv(uniformID, 1, GL_FALSE, glm::value_ptr(data));
 	}
 	else {
-		printf("In shader doesnt exist uniform variable %s!", name);
+		//printf("In shader doesnt exist uniform variable %s!", name);
 	}
 }
 
@@ -102,7 +103,7 @@ void ShaderApp::sendUniform(const GLchar* name, glm::vec3 data)
 		glProgramUniform3f(this->shaderProgramId, myLoc, data.x, data.y, data.z); 
 	}
 	else {
-		printf("In shader doesnt exist uniform variable %s!", name);
+		//printf("In shader doesnt exist uniform variable %s!", name);
 	}
 }
 
@@ -113,7 +114,7 @@ void ShaderApp::sendUniform(const GLchar* name, int data)
 		glProgramUniform1i(this->shaderProgramId, myLoc, data);
 	}
 	else {
-		printf("In shader doesnt exist uniform variable %s!", name);
+		//printf("In shader doesnt exist uniform variable %s!", name);
 	}
 }
 
@@ -124,7 +125,7 @@ void ShaderApp::sendUniform(const GLchar* name, float data)
 		glProgramUniform1f(this->shaderProgramId, myLoc, data);
 	}
 	else {
-		printf("In shader doesnt exist uniform variable %s!", name);
+		//printf("In shader doesnt exist uniform variable %s!", name);
 
 	}
 }

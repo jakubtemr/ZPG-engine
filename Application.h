@@ -12,7 +12,6 @@
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 
-//Include the standard C++ headers  
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -46,6 +45,13 @@ private:
 
 	int width;
 	int height;
+	bool moveObject = false;
+	bool moveCurveObject = false;
+	int controlCurve = 0;
+	glm::vec3 startCurve;
+	glm::vec3 control1;
+	glm::vec3 control2;
+	int objectCurveIndex = 0;
 
 	Camera* cam;
 	float mouseX = 0.f;
@@ -55,4 +61,6 @@ private:
 	Scene* mainScene;
 	void identifyObject();
 	void pushObject();
+	void LinearMoveObject();
+	void CurveMoveObject();
 };

@@ -16,6 +16,9 @@
     <Filter Include="Models">
       <UniqueIdentifier>{43cdc80e-e43b-41fb-baee-538c889c7eb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{6e504a4a-1822-460e-84fc-2b733c143f7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cv1.cpp">
@@ -57,9 +60,33 @@
     <ClCompile Include="Movement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Shaders\Blinn.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\Lambert.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\Phong.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\PhongControl.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\Shader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\SkyBox.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\SkyBox.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Model.h">
@@ -76,15 +103,6 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tree.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="suzi_smooth.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="sphere.h">
-      <Filter>Models</Filter>
     </ClInclude>
     <ClInclude Include="CameraObserver.h">
       <Filter>Header Files</Filter>
@@ -122,5 +140,31 @@
     <ClInclude Include="Movement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="models\sphere.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="models\stb_image.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="models\suzi_smooth.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="models\tree.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="models\plain.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="cv1.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

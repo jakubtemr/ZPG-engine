@@ -7,6 +7,8 @@
 #include "models/suzi_smooth.h"
 #include "models/sphere.h"
 #include "models/tree.h"
+#include "models/plain.h"
+
 
 class ModelManager
 {

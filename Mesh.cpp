@@ -6,10 +6,10 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, Material m
     this->indices = indices;
     this->material = material;
 
-    setupMesh();
+    createMesh();
 }
 
-void Mesh::setupMesh()
+void Mesh::createMesh()
 {
     glGenVertexArrays(1, &VAO); 
     glGenBuffers(1, &VBO); 
@@ -27,7 +27,11 @@ void Mesh::setupMesh()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
+
+    //glEnableVertexAttribArray(2);
+    //glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Color));
     glEnableVertexAttribArray(2);
+
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
 
     glBindVertexArray(0);

@@ -28,7 +28,7 @@ out vec4 frag_colour;
 
 float lightCalc(vec3 lightVector){
 	float dot_product = max(dot(lightVector, normalize(ex_WorldNormal)), 0.0);
-	return dot_product; // Difuzn� slo�ka sv�tla
+	return dot_product;
 }
 
 void main(){

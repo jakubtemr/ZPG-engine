@@ -25,12 +25,13 @@ out vec4 frag_colour;
 
 float lightCalc(vec3 lightVector){
 	float dot_product = max(dot(lightVector, normalize(ex_WorldNormal)), 0.0);
-	return dot_product;
+	return dot_product; 
 }
 
 void main(){
 	vec3 lightVector;
-	vec3 diffuse = vec3(0.1f,0.1f,0.1f);
+	vec4 texColor = texture(textureUnitID, uv);
+	vec3 diffuse = vec3(0.2); 
 
 	for(int i = 0; i < lightsCount; i++) {
 		if(lights[i].type == 0){
@@ -47,19 +48,15 @@ void main(){
 			{       
 				diffuse += (lightCalc(lightVector) * lights[i].barva);
 			}
-			else{
-				diffuse += (lightCalc(vec3 (0.f,0.f,0.f)) * lights[i].barva);
-			}
 		}
 	}
 
-	vec4 ambient = vec4( ambientColor, 1.0);
-	vec3 viewDir = normalize(cameraPos - vec3(ex_WorldPos)); // V
-	vec3 halfwayDir = normalize(lightVector + viewDir); // H - vektor pulici �hel
-	//vec3 reflectDir = reflect(-lightVector, ex_WorldNormal); // R
-	float spec = pow(max(dot(ex_WorldNormal, halfwayDir), 0.0), 32); // ��m d�le t�m men�� odraz
+	vec4 ambient = vec4(ambientColor, 1.0);
+	vec3 viewDir = normalize(cameraPos - vec3(ex_WorldPos)); 
+	vec3 halfwayDir = normalize(lightVector + viewDir); 
+ 
+	float spec = pow(max(dot(ex_WorldNormal, halfwayDir), 0.0), 32); 
 	float specularStrength = 0.5;
-	vec3 specular = specularStrength * spec * vec3(1.0f, 1.0f, 1.0f); // posledn� slo�ka je barva sv�tla
+	vec3 specular = specularStrength * spec * vec3(1.0f, 1.0f, 1.0f); 
 	frag_colour = ambient + (vec4(diffuse, 1.0) * texture(textureUnitID, uv)) + vec4(specular,1.f);
-	//frag_colour = ambient + diffuse + spec;
 };

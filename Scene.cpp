@@ -1,9 +1,10 @@
 #include "Scene.h"
 
-Scene::Scene(std::vector<Object*> objects, Camera* camera, std::vector<Light*> lights) {
+Scene::Scene(std::vector<Object*> objects, Camera* camera, std::vector<Light*> lights, SkyBox* skybox) {
 	this->objects = objects;
 	this->camera = camera;
 	this->lights = lights;
+	this->skybox= skybox;
 }
 
 int Scene::objectIndex(GLuint id)
@@ -51,11 +52,15 @@ void Scene::Builder::addPointLight(glm::vec3 lightPos, glm::vec3 lightColor)
 {
 	this->lights.push_back(new Light(lightType::point, lightPos, lightColor));
 }
+void Scene::Builder::addSkyBox(std::vector<std::string> paths)
+{
+	this->skybox = new SkyBox(paths);
+}
 
 
 Scene* Scene::Builder::build()
 {
-	Scene* s = new Scene{ objects, camera, lights };
+	Scene* s = new Scene{ objects, camera, lights, skybox };
 	this->reset();
 	return s;
 }

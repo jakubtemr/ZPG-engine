@@ -6,9 +6,6 @@
 #include "ShaderApp.h"
 
 
-
-
-
 class Material
 {
 public:

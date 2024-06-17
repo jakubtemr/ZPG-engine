@@ -76,13 +76,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\mintl\Desktop\vsb\zpg\cv1\glfw-3.3.8.bin.WIN32\include;C:\Users\mintl\Desktop\vsb\zpg\cv1\glm-master</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\mintl\Desktop\vsb\zpg\cv1\glfw-3.3.8.bin.WIN32\include;C:\Users\mintl\Desktop\vsb\zpg\cv1\glm-master;C:\Users\mintl\Desktop\vsb\zpg\tem0017\assimp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\mintl\Desktop\vsb\zpg\cv1\glfw-3.3.8.bin.WIN32\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\mintl\Desktop\vsb\zpg\cv1\glfw-3.3.8.bin.WIN32\lib-vc2022;C:\Users\mintl\Desktop\vsb\zpg\tem0017\assimp\lib\Win32\v141\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -146,9 +146,17 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderApp.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Shaders\Blinn.frag" />
+    <None Include="Shaders\Lambert.frag" />
+    <None Include="Shaders\Phong.frag" />
+    <None Include="Shaders\PhongControl.frag" />
+    <None Include="Shaders\Shader.vert" />
+    <None Include="Shaders\SkyBox.frag" />
+    <None Include="Shaders\SkyBox.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -162,15 +170,22 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="ModelManager.h" />
+    <ClInclude Include="models\plain.h" />
+    <ClInclude Include="models\sphere.h" />
+    <ClInclude Include="models\stb_image.h" />
+    <ClInclude Include="models\suzi_smooth.h" />
+    <ClInclude Include="models\tree.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ShaderApp.h" />
     <ClInclude Include="ShaderManager.h" />
-    <ClInclude Include="sphere.h" />
+    <ClInclude Include="SkyBox.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="suzi_smooth.h" />
-    <ClInclude Include="tree.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="cv1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
